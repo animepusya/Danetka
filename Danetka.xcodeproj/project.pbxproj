@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		8CC77B5F2E34EE18005C0229 /* Yes No Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Yes No Game.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CC77B5F2E34EE18005C0229 /* Danetka.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Danetka.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -40,7 +40,7 @@
 		8CC77B602E34EE18005C0229 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8CC77B5F2E34EE18005C0229 /* Yes No Game.app */,
+				8CC77B5F2E34EE18005C0229 /* Danetka.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,9 +48,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8CC77B5E2E34EE18005C0229 /* Yes No Game */ = {
+		8CC77B5E2E34EE18005C0229 /* Danetka */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8CC77B6D2E34EE1A005C0229 /* Build configuration list for PBXNativeTarget "Yes No Game" */;
+			buildConfigurationList = 8CC77B6D2E34EE1A005C0229 /* Build configuration list for PBXNativeTarget "Danetka" */;
 			buildPhases = (
 				8CC77B5B2E34EE18005C0229 /* Sources */,
 				8CC77B5C2E34EE18005C0229 /* Frameworks */,
@@ -63,11 +63,11 @@
 			fileSystemSynchronizedGroups = (
 				8CC77B612E34EE18005C0229 /* Yes No Game */,
 			);
-			name = "Yes No Game";
+			name = Danetka;
 			packageProductDependencies = (
 			);
 			productName = "Yes No Game";
-			productReference = 8CC77B5F2E34EE18005C0229 /* Yes No Game.app */;
+			productReference = 8CC77B5F2E34EE18005C0229 /* Danetka.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -85,7 +85,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8CC77B5A2E34EE18005C0229 /* Build configuration list for PBXProject "Yes No Game" */;
+			buildConfigurationList = 8CC77B5A2E34EE18005C0229 /* Build configuration list for PBXProject "Danetka" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -100,7 +100,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8CC77B5E2E34EE18005C0229 /* Yes No Game */,
+				8CC77B5E2E34EE18005C0229 /* Danetka */,
 			);
 		};
 /* End PBXProject section */
@@ -276,7 +276,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "RM.Yes-No-Game";
+				PRODUCT_BUNDLE_IDENTIFIER = RM.Danetka;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -307,7 +307,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "RM.Yes-No-Game";
+				PRODUCT_BUNDLE_IDENTIFIER = RM.Danetka;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -318,7 +318,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8CC77B5A2E34EE18005C0229 /* Build configuration list for PBXProject "Yes No Game" */ = {
+		8CC77B5A2E34EE18005C0229 /* Build configuration list for PBXProject "Danetka" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8CC77B6B2E34EE1A005C0229 /* Debug */,
@@ -327,7 +327,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8CC77B6D2E34EE1A005C0229 /* Build configuration list for PBXNativeTarget "Yes No Game" */ = {
+		8CC77B6D2E34EE1A005C0229 /* Build configuration list for PBXNativeTarget "Danetka" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8CC77B6E2E34EE1A005C0229 /* Debug */,

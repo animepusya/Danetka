@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8CC77B5E2E34EE18005C0229"
-               BuildableName = "Yes No Game.app"
-               BlueprintName = "Yes No Game"
-               ReferencedContainer = "container:Yes No Game.xcodeproj">
+               BuildableName = "Danetka.app"
+               BlueprintName = "Danetka"
+               ReferencedContainer = "container:Danetka.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8CC77B5E2E34EE18005C0229"
-            BuildableName = "Yes No Game.app"
-            BlueprintName = "Yes No Game"
-            ReferencedContainer = "container:Yes No Game.xcodeproj">
+            BuildableName = "Danetka.app"
+            BlueprintName = "Danetka"
+            ReferencedContainer = "container:Danetka.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <StoreKitConfigurationFileReference
@@ -65,9 +65,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8CC77B5E2E34EE18005C0229"
-            BuildableName = "Yes No Game.app"
-            BlueprintName = "Yes No Game"
-            ReferencedContainer = "container:Yes No Game.xcodeproj">
+            BuildableName = "Danetka.app"
+            BlueprintName = "Danetka"
+            ReferencedContainer = "container:Danetka.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

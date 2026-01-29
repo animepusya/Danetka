@@ -10,6 +10,7 @@ import SwiftUI
 struct SettingsView: View {
     
     @EnvironmentObject private var purchases: PurchaseManager
+    @Environment(\.openURL) private var openURL
     
     private var appVersionText: String {
         let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "—"
@@ -65,6 +66,19 @@ struct SettingsView: View {
                                 .foregroundColor(.white.opacity(0.9))
                         }
                         .font(.body)
+                        
+                        dividerLine()
+
+                        Link(destination: URL(string: "https://animepusya.github.io/legal/danetka/privacypolicy")!) {
+                            HStack {
+                                Label("settings.privacy_policy", systemImage: "hand.raised")
+                                Spacer()
+                                Image(systemName: "arrow.up.right")
+                                    .opacity(0.9)
+                            }
+                            .contentShape(Rectangle())
+                            .foregroundColor(.white)
+                        }
                     }
                 }
 
@@ -152,8 +166,7 @@ struct SettingsView: View {
     
 
     private func openSystemSettings() {
-        guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
-        UIApplication.shared.open(url)
+        openURL(URL(string: UIApplication.openSettingsURLString)!)
     }
 
     private func sectionCard<Content: View>(@ViewBuilder _ content: () -> Content) -> some View {
