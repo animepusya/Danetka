@@ -42,17 +42,23 @@ struct SettingsView: View {
                             .font(.headline)
                             .foregroundColor(.white)
 
-                        Button(action: openSystemSettings) {
-                            HStack {
-                                Label("settings.language", systemImage: "globe")
-                                Spacer()
-                                Image(systemName: "arrow.up.right")
-                                    .opacity(0.9)
+                        VStack(alignment: .leading, spacing: 6) {
+                            Button(action: openSystemSettings) {
+                                HStack {
+                                    Label("settings.language", systemImage: "globe")
+                                    Spacer()
+                                    Image(systemName: "arrow.up.right")
+                                        .opacity(0.9)
+                                }
+                                .contentShape(Rectangle())
+                                .foregroundColor(.white)
                             }
-                            .contentShape(Rectangle())
-                            .foregroundColor(.white)
+                            .buttonStyle(.plain)
+
+                            Text("settings.language_hint_inline")
+                                .font(.footnote)
+                                .foregroundColor(.white.opacity(0.65))
                         }
-                        .buttonStyle(.plain)
 
                         dividerLine()
 
