@@ -42,7 +42,6 @@ enum Category: String, CaseIterable, Hashable {
     var productId: String? {
         guard !isFree else { return nil }
         return "danetka.category.\(rawValue.lowercased())"
-        // получится: danetka.category.military, danetka.category.anime, ...
     }
     
     static let unlockAllProductId = "danetka.all_categories"

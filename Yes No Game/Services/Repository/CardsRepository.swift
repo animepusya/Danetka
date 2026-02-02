@@ -11,7 +11,7 @@ final class CardsRepository {
     static let shared = CardsRepository()
     private init() {}
 
-    private let manifestURL = URL(string: "https://animepusya.github.io/YNG-content/manifest.json")!
+    private let manifestURL = URL(string: "https://raw.githubusercontent.com/animepusya/YNG-content/refs/heads/main/manifest.json")!
     private lazy var client = RemoteContentClient(manifestURL: manifestURL)
     private let cache = CardsDiskCache()
 
