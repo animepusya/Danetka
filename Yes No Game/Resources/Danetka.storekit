@@ -21,8 +21,13 @@
       "localizations" : [
         {
           "description" : "",
-          "displayName" : "",
+          "displayName" : "All Categories",
           "locale" : "en_US"
+        },
+        {
+          "description" : "",
+          "displayName" : "Все категории",
+          "locale" : "ru"
         }
       ],
       "productID" : "danetka.all_categories",
@@ -36,8 +41,13 @@
       "localizations" : [
         {
           "description" : "",
-          "displayName" : "",
+          "displayName" : "Science",
           "locale" : "en_US"
+        },
+        {
+          "description" : "",
+          "displayName" : "Наука",
+          "locale" : "ru"
         }
       ],
       "productID" : "danetka.category.science",
@@ -51,8 +61,13 @@
       "localizations" : [
         {
           "description" : "",
-          "displayName" : "",
+          "displayName" : "Anime",
           "locale" : "en_US"
+        },
+        {
+          "description" : "",
+          "displayName" : "Аниме",
+          "locale" : "ru"
         }
       ],
       "productID" : "danetka.category.anime",
@@ -66,8 +81,13 @@
       "localizations" : [
         {
           "description" : "",
-          "displayName" : "",
+          "displayName" : "Military",
           "locale" : "en_US"
+        },
+        {
+          "description" : "",
+          "displayName" : "Военные",
+          "locale" : "ru"
         }
       ],
       "productID" : "danetka.category.military",
@@ -81,8 +101,13 @@
       "localizations" : [
         {
           "description" : "",
-          "displayName" : "",
+          "displayName" : "Films",
           "locale" : "en_US"
+        },
+        {
+          "description" : "",
+          "displayName" : "Фильмы",
+          "locale" : "ru"
         }
       ],
       "productID" : "danetka.category.films",
@@ -96,8 +121,13 @@
       "localizations" : [
         {
           "description" : "",
-          "displayName" : "",
+          "displayName" : "Cartoons",
           "locale" : "en_US"
+        },
+        {
+          "description" : "",
+          "displayName" : "Мультики",
+          "locale" : "ru"
         }
       ],
       "productID" : "danetka.category.cartoons",
@@ -111,12 +141,37 @@
       "localizations" : [
         {
           "description" : "",
-          "displayName" : "",
+          "displayName" : "Travel",
           "locale" : "en_US"
+        },
+        {
+          "description" : "",
+          "displayName" : "Путешествия",
+          "locale" : "ru"
         }
       ],
       "productID" : "danetka.category.travel",
       "referenceName" : "danetka.category.travel",
+      "type" : "NonConsumable"
+    },
+    {
+      "displayPrice" : "1.99",
+      "familyShareable" : true,
+      "internalID" : "409D20F9",
+      "localizations" : [
+        {
+          "description" : "",
+          "displayName" : "Literature",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "",
+          "displayName" : "Литература",
+          "locale" : "ru"
+        }
+      ],
+      "productID" : "danetka.category.literature",
+      "referenceName" : "danetka.category.literature",
       "type" : "NonConsumable"
     }
   ],

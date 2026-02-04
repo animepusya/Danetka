@@ -512,6 +512,186 @@
         "explanation": "The criminal turns himself in because his plan is nearly complete. The police are not meant to judge him, but to become part of the final stage of his design. His actions follow a strict logic and symbolism, and the outcome is only possible with the detectives’ involvement. This story forms the basis of the film “Se7en” by David Fincher.",
         "imageName": "finalCorridor"
         
+    },
+    {
+        "id": 61,
+        "category": "Literature",
+        "title": "Teeth",
+        "description": "A man is haunted by an obsessive fixation on a single part of his beloved’s body.",
+        "hint": "His interest has nothing to do with love.",
+        "explanation": "The protagonist suffers from a severe mental disorder and gradually becomes fixated on Berenice’s teeth, losing the ability to perceive her as a living person. When she is presumed dead, he commits an act whose meaning he understands only later. The story is based on Edgar Allan Poe’s tale “Berenice”.",
+        "imageName": "bereniceTeeth"
+    },
+    {
+        "id": 62,
+        "category": "Literature",
+        "title": "The Mark",
+        "description": "A man believes he has committed the perfect crime, yet ends up exposing himself.",
+        "hint": "It is not the police who betray him.",
+        "explanation": "The protagonist murders his wife and hides the body, convinced the crime is unsolvable. However, guilt and madness take the form of a black cat, which ultimately leads to his downfall. The story is told in Edgar Allan Poe’s “The Black Cat”.",
+        "imageName": "blackCatGuilt"
+    },
+    {
+        "id": 63,
+        "category": "Literature",
+        "title": "The House That Feels",
+        "description": "A mansion slowly collapses along with the people who live inside it.",
+        "hint": "The house is more than just a setting.",
+        "explanation": "The Usher family is inseparably bound to the house: the mental and physical state of its inhabitants is reflected in the building itself. The return of a sister believed to be dead leads to the family’s destruction and the fall of the house. The story is based on Edgar Allan Poe’s “The Fall of the House of Usher”.",
+        "imageName": "usherHouse"
+    },
+    {
+        "id": 64,
+        "category": "Literature",
+        "title": "The Impossible Criminal",
+        "description": "A crime is committed in a sealed room, yet none of the suspects fit.",
+        "hint": "Logic matters more than motive.",
+        "explanation": "The investigation reaches a dead end because it assumes a human murderer. The solution becomes possible only when conventional assumptions are abandoned: the crime was not committed by a human. The story forms the basis of Edgar Allan Poe’s “The Murders in the Rue Morgue”.",
+        "imageName": "morgueRoomMystery"
+    },
+    {
+        "id": 65,
+        "category": "Literature",
+        "title": "The Return",
+        "description": "A man loses his wife, yet she continues to exist in his life.",
+        "hint": "The name matters.",
+        "explanation": "After Morella’s death, her consciousness seems to persist within the body of her daughter. The protagonist’s attempt to start a new life collapses when the past returns in the most literal sense. The story is based on Edgar Allan Poe’s “Morella”.",
+        "imageName": "morellaReturn"
+    },
+    {
+        "id": 66,
+        "category": "Literature",
+        "title": "The Finished Portrait",
+        "description": "An artist creates a painting that feels disturbingly alive.",
+        "hint": "Art demands sacrifice.",
+        "explanation": "As the artist works on a portrait of his wife, she gradually loses her vitality. At the moment the painting is completed, it becomes clear that the model’s life has been sacrificed for art. The story is told in Edgar Allan Poe’s “The Oval Portrait”.",
+        "imageName": "ovalPortrait"
+    },
+    {
+        "id": 67,
+        "category": "Literature",
+        "title": "Too Quiet",
+        "description": "A man believes he is fully in control, but suddenly loses his composure.",
+        "hint": "He hears what no one else can hear.",
+        "explanation": "After committing murder, the protagonist is convinced of his impunity, but during a police visit he begins to hear the sound of a beating heart — a manifestation of guilt and madness that leads to his confession. The story is based on Edgar Allan Poe’s “The Tell-Tale Heart”.",
+        "imageName": "telltaleHeart"
+    },
+    {
+        "id": 68,
+        "category": "Literature",
+        "title": "The Last Toast",
+        "description": "A man willingly follows an acquaintance into underground catacombs and never returns.",
+        "hint": "It all begins as a friendly gesture.",
+        "explanation": "Under the pretext of tasting a rare wine, the protagonist lures his victim into the catacombs, where he carries out long-planned revenge. The story is told in Edgar Allan Poe’s “The Cask of Amontillado”.",
+        "imageName": "amontilladoCask"
+    },
+    {
+        "id": 69,
+        "category": "Literature",
+        "title": "Waking Up Too Early",
+        "description": "A person lives in constant fear of being declared dead.",
+        "hint": "His fear is not unfounded.",
+        "explanation": "The protagonist suffers from deathlike states and becomes obsessed with the idea of premature burial. This fear shapes his behavior and perception of reality. The story is based on Edgar Allan Poe’s “The Premature Burial”.",
+        "imageName": "prematureBurial"
+    },
+    {
+        "id": 610,
+        "category": "Literature",
+        "title": "The Closed Door",
+        "description": "People attempt to hide from danger by isolating themselves from the outside world.",
+        "hint": "There is no escape from it.",
+        "explanation": "The wealthy and powerful lock themselves inside a luxurious castle to escape an epidemic, yet death finds its way in despite all precautions. The story is based on Edgar Allan Poe’s “The Masque of the Red Death”.",
+        "imageName": "redDeathMasque"
+    },
+    {
+        "id": 611,
+        "category": "Literature",
+        "title": "The Zone",
+        "description": "People risk their lives to retrieve objects whose purpose no one fully understands.",
+        "hint": "This is not an ordinary dangerous place.",
+        "explanation": "The Zone is an anomalous territory left behind after a visit by an extraterrestrial civilization. Objects found there possess strange properties and lethal dangers. People enter it for profit, unaware of the true nature of what is happening. The story is based on Arkady and Boris Strugatsky’s “Roadside Picnic”.",
+        "imageName": "stalkerZone"
+    },
+    {
+        "id": 612,
+        "category": "Literature",
+        "title": "A Difficult Choice",
+        "description": "A man observes a brutal world but has no right to change it.",
+        "hint": "He knows more than those around him.",
+        "explanation": "The protagonist is a representative of an advanced civilization living among people trapped in an age of violence and ignorance. He understands that any interference could destroy the natural course of history. The story is told in Arkady and Boris Strugatsky’s novel “Hard to Be a God”.",
+        "imageName": "hardToBeGod"
+    },
+    {
+        "id": 613,
+        "category": "Literature",
+        "title": "The City With No Exit",
+        "description": "People live in a strange city without knowing how or why they ended up there.",
+        "hint": "The experiment continues.",
+        "explanation": "The city exists as a closed system where people from different eras are forced to live under incomprehensible rules. Gradually it becomes clear that what is happening is part of a large-scale experiment on humanity. The story is based on Arkady and Boris Strugatsky’s novel “The Doomed City”.",
+        "imageName": "doomedCity"
+    },
+    {
+        "id": 614,
+        "category": "Literature",
+        "title": "The Signal",
+        "description": "Scientists encounter a mysterious force that prevents them from completing their work.",
+        "hint": "The cause is not external.",
+        "explanation": "The protagonists notice that strange events occur every time they approach a major scientific breakthrough. Gradually it becomes clear that the universe itself seems to resist their activity. The story is based on Arkady and Boris Strugatsky’s “A Billion Years Before the End of the World”.",
+        "imageName": "billionYearsSignal"
+    },
+    {
+        "id": 615,
+        "category": "Literature",
+        "title": "The Illusion of Freedom",
+        "description": "A man believes he makes his own choices, yet is constantly influenced.",
+        "hint": "Freedom can be engineered.",
+        "explanation": "The protagonist lives in a world where public opinion and special devices control human consciousness. He gradually begins to realize the scale of this manipulation. The story is told in Arkady and Boris Strugatsky’s novel “Prisoners of Power”.",
+        "imageName": "inhabitedIsland"
+    },
+    {
+        "id": 616,
+        "category": "Literature",
+        "title": "Progress",
+        "description": "People attempt to accelerate the development of another civilization.",
+        "hint": "Help is not always a blessing.",
+        "explanation": "Representatives of a more advanced society secretly guide the development of less advanced worlds, believing it to be beneficial. However, the consequences of such interference prove ambiguous. The story is based on the Strugatskys’ Progressors cycle.",
+        "imageName": "progressors"
+    },
+    {
+        "id": 617,
+        "category": "Literature",
+        "title": "Happiness by Instruction",
+        "description": "Humanity is offered a simple formula for happiness.",
+        "hint": "The price is too high.",
+        "explanation": "People are encouraged to abandon difficult choices and personal responsibility in exchange for guaranteed well-being. This raises the question: is happiness possible without freedom? The story is inspired by the philosophical ideas of Arkady and Boris Strugatsky’s “The Ugly Swans”.",
+        "imageName": "happinessManual"
+    },
+    {
+        "id": 618,
+        "category": "Literature",
+        "title": "The Unneeded Hero",
+        "description": "A man finds himself in a world where his best qualities are useless.",
+        "hint": "Honesty hinders survival.",
+        "explanation": "The protagonist confronts a system in which morality and integrity offer no advantages and instead become weaknesses. The story unfolds in Arkady and Boris Strugatsky’s novel “The Doomed City”.",
+        "imageName": "uselessHero"
+    },
+    {
+        "id": 619,
+        "category": "Literature",
+        "title": "Contact",
+        "description": "Humanity discovers traces of an alien intelligence but cannot grasp its intent.",
+        "hint": "Contact is not always dialogue.",
+        "explanation": "The remnants of another civilization’s activity turn out to be unintentional, like trash left behind after a picnic. Humanity searches for meaning where none was ever intended. The story is based on Arkady and Boris Strugatsky’s “Roadside Picnic”.",
+        "imageName": "contactNotDialogue"
+    },
+    {
+        "id": 620,
+        "category": "Literature",
+        "title": "A Choice Without a Right Answer",
+        "description": "A person is forced to choose, knowing that any decision will lead to loss.",
+        "hint": "Refusal is also a choice.",
+        "explanation": "Characters in the Strugatskys’ works often face situations with no morally correct solution. Responsibility for the consequences lies entirely with the individual. This card is inspired by a core theme of Arkady and Boris Strugatsky’s work.",
+        "imageName": "noRightChoice"
     }
 ]
  

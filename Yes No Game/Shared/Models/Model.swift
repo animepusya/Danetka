@@ -27,6 +27,7 @@ enum Category: String, CaseIterable, Hashable {
     case films = "Films"
     case cartoons = "Cartoons"
     case travel = "Travel"
+    case literature = "Literature"
 
     var title: String {
             NSLocalizedString("category.\(rawValue.lowercased())", comment: "")

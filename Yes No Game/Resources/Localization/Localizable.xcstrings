@@ -118,6 +118,23 @@
         }
       }
     },
+    "category.literature" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Literature"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Литература"
+          }
+        }
+      }
+    },
     "category.military" : {
       "comment" : "Categories",
       "extractionState" : "manual",
