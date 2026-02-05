@@ -83,6 +83,15 @@ struct CardView: View {
                             }
                         }
                     }
+                    .onChange(of: viewModel.currentCard?.id) { _, _ in
+                        isAnswerExpanded = false
+
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                            withAnimation(.easeInOut(duration: 0.25)) {
+                                proxy.scrollTo(topAnchorId, anchor: .top)
+                            }
+                        }
+                    }
                     .onChange(of: isAnswerExpanded) { _, expanded in
                         guard expanded, viewModel.showHint else { return }
 
