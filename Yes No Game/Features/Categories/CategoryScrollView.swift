@@ -17,14 +17,13 @@ struct CategoryScrollView: View {
     let onOpenCard: (Card, Category) -> Void
     
     var body: some View {
+        let hasAccess = purchases.hasAccess(to: category)
+
         VStack(alignment: .leading, spacing: 0) {
             
             Button {
-                if purchases.hasAccess(to: category) {
-                    onOpenCategory(category)
-                } else {
-                    showPaywall = true
-                }
+                if hasAccess { onOpenCategory(category) }
+                else { showPaywall = true }
             } label: {
                 HStack {
                     Text(category.title)
@@ -34,8 +33,8 @@ struct CategoryScrollView: View {
                         .padding(.horizontal)
                     
                     Spacer()
-                    
-                    if !purchases.hasAccess(to: category) {
+
+                    if !hasAccess {
                         HStack(spacing: 6) {
                             Image(systemName: "lock.fill")
                                 .font(.caption)
@@ -53,38 +52,53 @@ struct CategoryScrollView: View {
                 }
             }
             .buttonStyle(.plain)
-            .sheet(isPresented: $showPaywall) {
-                PaywallView(category: category)
-                    .environmentObject(purchases)
-            }
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 16) {
-                    ForEach(cards) { card in
-                        Button {
-                            if purchases.hasAccess(to: category) {
-                                onOpenCard(card, category)
-                            } else {
-                                showPaywall = true
+
+            GeometryReader { geo in
+                let cardWidth: CGFloat = 160
+                let horizontalPadding: CGFloat = 16
+                let available = geo.size.width - (horizontalPadding * 2)
+
+                // spacing, чтобы ровно 2 карточки помещались без “краешка” третьей
+                let computedSpacing = max(16, available - (cardWidth * 2))
+
+                ScrollView(.horizontal, showsIndicators: false) {
+                    LazyHStack(spacing: computedSpacing) {
+                        ForEach(cards) { card in
+                            Button {
+                                if hasAccess { onOpenCard(card, category) }
+                                else { showPaywall = true }
+                            } label: {
+                                IconCardView(card: card)
                             }
-                        } label: {
-                            IconCardView(card: card)
+                            .buttonStyle(.plain)
                         }
-                        .buttonStyle(.plain)
                     }
-                    .padding()
+                    .padding(.horizontal, horizontalPadding)
+                    .padding(.vertical, 12)
+                    .scrollTargetLayout()
                 }
+                .scrollTargetBehavior(.viewAligned)
+                
+
             }
+            .frame(height: 220 + 24) // высота карточки + vertical padding*2
+
+        }
+        .sheet(isPresented: $showPaywall) {
+            PaywallView(category: category)
+                .environmentObject(purchases)
         }
     }
 }
 
 #Preview {
     let sampleCards = CardLoader.load().filter { $0.category == Category.military.rawValue }
+
     CategoryScrollView(
         category: .military,
         cards: sampleCards,
         onOpenCategory: { _ in },
         onOpenCard: { _, _ in }
     )
+    .environmentObject(PurchaseManager())
 }

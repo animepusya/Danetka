@@ -17,82 +17,80 @@ struct PaywallView: View {
     @State private var errorText: String?
 
     var body: some View {
-        VStack(spacing: 16) {
+        VStack {
             Capsule()
                 .fill(Color.secondary.opacity(0.25))
                 .frame(width: 40, height: 5)
                 .padding(.top, 8)
-
-            Text(category.title)
-                .font(.title2)
-                .fontWeight(.bold)
-                .foregroundStyle(.primary)
-
-            Text("paywall.subtitle")
-                .font(.body)
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 8)
-
-            if let errorText {
-                Text(errorText)
-                    .font(.footnote)
-                    .foregroundStyle(.red)
+            
+            ScrollView(.vertical, showsIndicators: false) {
+                
+                Text(category.title)
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .foregroundStyle(.primary)
+                
+                Text("paywall.subtitle")
+                    .font(.body)
+                    .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 8)
-            }
-
-            VStack(spacing: 10) {
-                if let pid = category.productId {
+                
+                if let errorText {
+                    Text(errorText)
+                        .font(.footnote)
+                        .foregroundStyle(.red)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 8)
+                }
+                
+                VStack(spacing: 10) {
+                    if let pid = category.productId {
+                        ActionButtonView(
+                            title: "paywall.unlock_category",
+                            trailingText: purchases.priceText(for: pid) ?? "$1.99",
+                            style: .primary,
+                            isDisabled: isBusy,
+                            isLoading: isBusy
+                        ) {
+                            Task { await buyCategory(pid) }
+                        }
+                    }
+                    
                     ActionButtonView(
-                        title: "paywall.unlock_category",
-                        trailingText: purchases.priceText(for: pid) ?? "$1.99",
-                        style: .primary,
+                        title: "paywall.unlock_all",
+                        trailingText: purchases.priceText(for: Category.unlockAllProductId) ?? "$4.99",
+                        style: .secondary,
                         isDisabled: isBusy,
                         isLoading: isBusy
                     ) {
-                        Task { await buyCategory(pid) }
+                        Task { await buyAll() }
+                    }
+                    
+                    ActionButtonView(
+                        title: "paywall.restore",
+                        trailingSystemImage: "arrow.clockwise",
+                        style: .secondary,
+                        isDisabled: isBusy,
+                        isLoading: isBusy
+                    ) {
+                        Task { await restore() }
                     }
                 }
-
-                ActionButtonView(
-                    title: "paywall.unlock_all",
-                    trailingText: purchases.priceText(for: Category.unlockAllProductId) ?? "$4.99",
-                    style: .secondary,
-                    isDisabled: isBusy,
-                    isLoading: isBusy
-                ) {
-                    Task { await buyAll() }
-                }
-
-                ActionButtonView(
-                    title: "paywall.restore",
-                    trailingSystemImage: "arrow.clockwise",
-                    style: .secondary,
-                    isDisabled: isBusy,
-                    isLoading: isBusy
-                ) {
-                    Task { await restore() }
-                }
+                
+                Button("paywall.close") { dismiss() }
+                    .font(.headline)
+                    .foregroundStyle(.secondary)
+                    .padding(.top, 4)
             }
-
-
-            Button("paywall.close") { dismiss() }
-                .font(.headline)
-                .foregroundStyle(.secondary)
-                .padding(.top, 4)
-
-            Spacer(minLength: 0)
         }
         .padding(.horizontal, 20)
         .padding(.bottom, 18)
         .presentationDetents([.medium])
         .task {
-            // ⚠️ важно: чтобы цены подгрузились
             await purchases.loadProductsIfNeeded()
         }
         .onChange(of: purchases.ownedProductIds) { _, _ in
-            // ✅ если после любой покупки появился доступ — закрываем
             if purchases.hasAccess(to: category) {
                 dismiss()
             }
@@ -104,7 +102,6 @@ struct PaywallView: View {
     private func buyCategory(_ productId: String) async {
         await runBusyAction {
             await purchases.buy(category: category)
-            // закрытие сделает onChange (как только entitlement обновится)
         }
     }
 
