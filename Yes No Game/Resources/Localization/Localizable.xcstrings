@@ -381,13 +381,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Unlock this category to access all cards."
+            "value" : "Unlock this category to access all its cards."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Открыть категорию, чтобы получить доступ ко всем карточкам."
+            "value" : "Открыть эту категорию, чтобы получить доступ к её карточкам."
           }
         }
       }
