@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CategoryCardsView: View {
+struct CategoryVScrollView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var purchases: PurchaseManager
     @State private var showPaywall = false
@@ -77,7 +77,7 @@ struct CategoryCardsView: View {
     let sampleCategory: Category = .military
     let sampleCards = viewModel.cards(for: sampleCategory)
 
-    CategoryCardsView(
+    CategoryVScrollView(
         category: sampleCategory,
         cards: sampleCards,
         onOpenCard: { _, _ in }

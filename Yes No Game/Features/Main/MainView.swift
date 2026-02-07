@@ -17,7 +17,7 @@ struct MainView: View {
         ScrollView {
             VStack(spacing: 20) {
                 ForEach(viewModel.categoriesWithCards, id: \.self) { category in
-                    CategoryScrollView(
+                    CategoryHScrollView(
                         category: category,
                         cards: viewModel.cards(for: category),
                         onOpenCategory: { cat in

@@ -50,7 +50,7 @@ struct AppRootView: View {
                 .navigationDestination(for: Route.self) { route in
                     switch route {
                     case .category(let category):
-                        CategoryCardsView(
+                        CategoryVScrollView(
                             category: category,
                             cards: mainViewModel.cards(for: category),
                             onOpenCard: { card, cat in

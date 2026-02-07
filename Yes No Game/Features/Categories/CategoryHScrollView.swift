@@ -7,20 +7,21 @@
 
 import SwiftUI
 
-struct CategoryScrollView: View {
+struct CategoryHScrollView: View {
     @EnvironmentObject private var purchases: PurchaseManager
     @State private var showPaywall = false
+
     let category: Category
     let cards: [Card]
-    
+
     let onOpenCategory: (Category) -> Void
     let onOpenCard: (Card, Category) -> Void
-    
+
     var body: some View {
         let hasAccess = purchases.hasAccess(to: category)
 
         VStack(alignment: .leading, spacing: 0) {
-            
+
             Button {
                 if hasAccess { onOpenCategory(category) }
                 else { showPaywall = true }
@@ -31,7 +32,7 @@ struct CategoryScrollView: View {
                         .fontWeight(.bold)
                         .foregroundColor(.graphite)
                         .padding(.horizontal)
-                    
+
                     Spacer()
 
                     if !hasAccess {
@@ -44,7 +45,7 @@ struct CategoryScrollView: View {
                                 .foregroundColor(.graphite.opacity(0.6))
                         }
                     }
-                    
+
                     Image(systemName: "chevron.right")
                         .font(.caption.weight(.semibold))
                         .foregroundColor(.graphite.opacity(0.35))
@@ -57,32 +58,31 @@ struct CategoryScrollView: View {
                 let cardWidth: CGFloat = 160
                 let horizontalPadding: CGFloat = 16
                 let available = geo.size.width - (horizontalPadding * 2)
-
-                // spacing, чтобы ровно 2 карточки помещались без “краешка” третьей
                 let computedSpacing = max(16, available - (cardWidth * 2))
-
-                ScrollView(.horizontal, showsIndicators: false) {
-                    LazyHStack(spacing: computedSpacing) {
+                
+                SnappingHScrollView(
+                    itemWidth: cardWidth,
+                    itemSpacing: computedSpacing,
+                    horizontalPadding: horizontalPadding,
+                    contentHeight: 220 + 24,
+                    snapDuration: 1.2
+                ) {
+                    HStack(spacing: computedSpacing) {
                         ForEach(cards) { card in
                             Button {
                                 if hasAccess { onOpenCard(card, category) }
                                 else { showPaywall = true }
                             } label: {
                                 IconCardView(card: card)
+                                    .frame(width: cardWidth)
                             }
                             .buttonStyle(.plain)
                         }
                     }
-                    .padding(.horizontal, horizontalPadding)
                     .padding(.vertical, 12)
-                    .scrollTargetLayout()
                 }
-                .scrollTargetBehavior(.viewAligned)
-                
-
             }
-            .frame(height: 220 + 24) // высота карточки + vertical padding*2
-
+            .frame(height: 220 + 24)
         }
         .sheet(isPresented: $showPaywall) {
             PaywallView(category: category)
@@ -94,7 +94,7 @@ struct CategoryScrollView: View {
 #Preview {
     let sampleCards = CardLoader.load().filter { $0.category == Category.military.rawValue }
 
-    CategoryScrollView(
+    CategoryHScrollView(
         category: .military,
         cards: sampleCards,
         onOpenCategory: { _ in },
