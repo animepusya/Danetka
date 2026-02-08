@@ -119,54 +119,54 @@
     {
         "id": 21,
         "category": "Horror",
-        "title": "The Endless Road",
-        "description": "No matter which road she chose, she always ended up in the same place.",
-        "hint": "The place was tragic.",
-        "explanation": "After death, the human soul continued walking as if nothing had happened. But every path it chose inevitably led back to the place of death, as if the city or its streets refused to let it leave this world.",
+        "title": "Endless Road",
+        "description": "No matter which way she went, the road always led her back to the same place.",
+        "hint": "The place was tied to a tragedy.",
+        "explanation": "After her death, the soul kept walking as if nothing had happened. But every path she chose inevitably brought her back to the place where she died, as if the city itself refused to let her leave this world.",
         "imageName": "endlessRoad"
     },
     {
         "id": 22,
         "category": "Horror",
         "title": "Leap of Faith",
-        "description": "A group of thrill-seekers jumped from a rooftop and none survived.",
-        "hint": "The roof looked completely safe.",
-        "explanation": "They decided to jump using homemade parachutes made from trash bags. The bags could not support the weight, and the jump turned fatal.",
+        "description": "People willingly jumped from a rooftop and died.",
+        "hint": "They were sure everything was carefully calculated.",
+        "explanation": "They decided to jump using homemade parachutes made from trash bags. The bags couldn’t support their weight, and the jump turned out to be fatal.",
         "imageName": "deadJump"
     },
     {
         "id": 23,
         "category": "Horror",
         "title": "Knocking from the Bathroom",
-        "description": "At night, knocking sounds came from the bathroom.",
-        "hint": "The sound was not coming from the room itself.",
-        "explanation": "The knocking came from inside the wall — a person working in the building’s technical space got stuck there. The blows echoed and were heard in the bathroom.",
+        "description": "At night, rhythmic knocking could be heard coming from the bathroom.",
+        "hint": "The sound didn’t come from the room itself.",
+        "explanation": "The knocking came from inside the wall — a man working in the building’s technical space had gotten stuck there. The blows echoed through the bathroom.",
         "imageName": "bathroomKnock"
     },
     {
         "id": 24,
         "category": "Horror",
-        "title": "Voicemail Recording",
+        "title": "Voicemail",
         "description": "A woman heard her own voice on the answering machine, begging her not to leave the house.",
-        "hint": "The recording was new.",
-        "explanation": "The message was left by herself — in another version of events where she already knew what would happen next.",
+        "hint": "The message was new.",
+        "explanation": "She had left the message herself — in another version of events, where she already knew what was going to happen.",
         "imageName": "voicemailWarning"
     },
     {
         "id": 25,
         "category": "Horror",
         "title": "Light in the Window",
-        "description": "At night, he saw a light in the neighbors’ apartment, even though they had left.",
-        "hint": "No one was living in the apartment.",
-        "explanation": "The apartment had an automatic lighting system with a timer to simulate the owners’ presence. The timer triggered in the middle of the night and turned the light on. He didn’t know about this and assumed someone was inside the empty apartment.",
+        "description": "Late at night, a light turned on in the window of an empty apartment across the street.",
+        "hint": "No one lived in the apartment.",
+        "explanation": "The apartment had an automatic lighting system with a timer meant to simulate the owners’ presence. The timer activated in the middle of the night, turning on the light even though the apartment was empty.",
         "imageName": "lightInWindow"
     },
     {
         "id": 26,
         "category": "Horror",
         "title": "Dangerous Tasting",
-        "description": "All participants of a food tasting were hospitalized.",
-        "hint": "The dishes looked normal.",
+        "description": "After a food tasting, everyone started feeling sick.",
+        "hint": "The dishes looked completely normal.",
         "explanation": "An expired ingredient was accidentally used in the kitchen, causing severe food poisoning among all the guests.",
         "imageName": "foodTasting"
     },
@@ -176,15 +176,15 @@
         "title": "Crying",
         "description": "A man heard a child crying under his bed.",
         "hint": "He lived alone.",
-        "explanation": "The man had recently moved into the apartment. The previous tenants were in a hurry and forgot a baby monitor in a neighboring apartment. The device continued picking up the signal, and through the apartment’s acoustics the sound seemed to come from directly under the bed.",
+        "explanation": "The man had recently moved into the apartment. The previous tenants had moved out in a hurry and left a baby monitor in a neighboring apartment. The device was still picking up a signal, making the sound seem as if it was coming from under the bed.",
         "imageName": "childUnderBed"
     },
     {
         "id": 28,
         "category": "Horror",
         "title": "Apocalypse in the Room",
-        "description": "A man clapped his hands, and everyone else in the room died.",
-        "hint": "It was summer.",
+        "description": "A person clapped their hands, and everyone else in the room died.",
+        "hint": "It was a completely ordinary action.",
         "explanation": "He was killing mosquitoes.",
         "imageName": "clapKilling"
     },
@@ -192,18 +192,18 @@
         "id": 29,
         "category": "Horror",
         "title": "The Drowning Man",
-        "description": "A man was drowning in a pool, and no one came to help him.",
-        "hint": "It looked like a regular training exercise.",
-        "explanation": "The man was taking part in a water rescue training session. During the exercise, he suddenly felt unwell and suffered cramps. The trainee responsible for rescuing him panicked and failed to act in time. The instructor observed from the side, expecting the trainee to handle it, and intervened too late.",
+        "description": "A man was drowning in a swimming pool, and no one came to help him.",
+        "hint": "The situation looked like a normal training exercise.",
+        "explanation": "The man was taking part in a water rescue training session. During the exercise, he suddenly felt unwell and suffered muscle cramps. The trainee who was supposed to rescue him panicked and didn’t react in time. The instructor watched from the side, expecting the trainee to handle it, and intervened too late.",
         "imageName": "manInPool"
     },
     {
         "id": 210,
         "category": "Horror",
         "title": "People in the River",
-        "description": "Everyone on the observation deck fell into the river.",
-        "hint": "They couldn’t have prevented it in advance.",
-        "explanation": "The observation deck had just reopened after renovation, and the railing was poorly secured. When people leaned on it, it broke all at once.",
+        "description": "Everyone standing on the observation platform fell into the river.",
+        "hint": "They couldn’t have done anything in advance.",
+        "explanation": "The observation platform had just reopened after renovations, but the railing was poorly secured. When people leaned against it, it collapsed all at once.",
         "imageName": "viewpointFall"
     },
     {
@@ -211,8 +211,8 @@
         "category": "Horror",
         "title": "Deadly Dance",
         "description": "A pair of dancers died during a dance competition.",
-        "hint": "The cause was not obvious to the audience.",
-        "explanation": "During a tango performance, another pair, desperate to win, poisoned a rose that the dancers passed to each other during the routine. The poisoned rose killed the first pair, allowing the second to win the competition.",
+        "hint": "The cause wasn’t obvious to the audience.",
+        "explanation": "During a tango performance, another pair — desperate to win — poisoned a rose that the dancers passed to each other as part of the choreography. The poisoned rose killed the first couple, allowing the second pair to win the competition.",
         "imageName": "deadDance"
     },
     {
