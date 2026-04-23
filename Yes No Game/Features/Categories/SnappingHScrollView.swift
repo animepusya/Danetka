@@ -63,6 +63,7 @@ struct SnappingHScrollView<Content: View>: UIViewRepresentable {
         let host = UIHostingController(rootView: content)
         host.view.backgroundColor = .clear
         host.view.translatesAutoresizingMaskIntoConstraints = false
+        let hostHeightConstraint = host.view.heightAnchor.constraint(equalToConstant: contentHeight)
 
         scrollView.addSubview(host.view)
 
@@ -72,12 +73,13 @@ struct SnappingHScrollView<Content: View>: UIViewRepresentable {
             host.view.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
             host.view.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
 
-            host.view.heightAnchor.constraint(equalToConstant: contentHeight),
+            hostHeightConstraint,
             host.view.widthAnchor.constraint(greaterThanOrEqualToConstant: 1)
         ])
 
         context.coordinator.hostingController = host
         context.coordinator.scrollView = scrollView
+        context.coordinator.hostHeightConstraint = hostHeightConstraint
         context.coordinator.applyInitialOffsetIfNeeded()
         return scrollView
     }
@@ -86,14 +88,19 @@ struct SnappingHScrollView<Content: View>: UIViewRepresentable {
         context.coordinator.itemWidth = itemWidth
         context.coordinator.itemSpacing = itemSpacing
         context.coordinator.horizontalPadding = horizontalPadding
+        context.coordinator.contentHeight = contentHeight
         context.coordinator.snapDuration = snapDuration
         context.coordinator.velocityThreshold = velocityThreshold
 
         uiView.contentInset.left = horizontalPadding
         uiView.contentInset.right = horizontalPadding
+        context.coordinator.hostHeightConstraint?.constant = contentHeight
 
         context.coordinator.hostingController?.rootView = content
         context.coordinator.hostingController?.view.invalidateIntrinsicContentSize()
+        context.coordinator.hostingController?.view.setNeedsLayout()
+        context.coordinator.hostingController?.view.layoutIfNeeded()
+        uiView.setNeedsLayout()
         uiView.layoutIfNeeded()
         context.coordinator.applyInitialOffsetIfNeeded()
     }
@@ -103,6 +110,7 @@ struct SnappingHScrollView<Content: View>: UIViewRepresentable {
             itemWidth: itemWidth,
             itemSpacing: itemSpacing,
             horizontalPadding: horizontalPadding,
+            contentHeight: contentHeight,
             snapDuration: snapDuration,
             velocityThreshold: velocityThreshold
         )
@@ -112,11 +120,13 @@ struct SnappingHScrollView<Content: View>: UIViewRepresentable {
         var itemWidth: CGFloat
         var itemSpacing: CGFloat
         var horizontalPadding: CGFloat
+        var contentHeight: CGFloat
         var snapDuration: TimeInterval
         var velocityThreshold: CGFloat
 
         weak var scrollView: UIScrollView?
         var hostingController: UIHostingController<Content>?
+        var hostHeightConstraint: NSLayoutConstraint?
 
         private var isSnapping = false
         private var animator: UIViewPropertyAnimator?
@@ -126,12 +136,14 @@ struct SnappingHScrollView<Content: View>: UIViewRepresentable {
             itemWidth: CGFloat,
             itemSpacing: CGFloat,
             horizontalPadding: CGFloat,
+            contentHeight: CGFloat,
             snapDuration: TimeInterval,
             velocityThreshold: CGFloat
         ) {
             self.itemWidth = itemWidth
             self.itemSpacing = itemSpacing
             self.horizontalPadding = horizontalPadding
+            self.contentHeight = contentHeight
             self.snapDuration = snapDuration
             self.velocityThreshold = velocityThreshold
         }

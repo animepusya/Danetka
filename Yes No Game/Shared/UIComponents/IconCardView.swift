@@ -9,21 +9,35 @@ import SwiftUI
 
 struct IconCardView: View {
     let card: Card
+    let width: CGFloat
+    let height: CGFloat
+    
+    init(
+        card: Card,
+        width: CGFloat = AdaptiveCardLayout.minimumCardWidth,
+        height: CGFloat? = nil
+    ) {
+        self.card = card
+        self.width = width
+        self.height = height ?? (width / AdaptiveCardLayout.cardAspectRatio).rounded(.down)
+    }
+    
+    private var artworkSource: CardArtworkSource {
+        if let url = card.imageUrl, !url.isEmpty {
+            return .remote(url)
+        }
+        
+        if let name = card.imageName, !name.isEmpty {
+            return .local(name)
+        }
+        
+        return .placeholder
+    }
     
     var body: some View {
         ZStack(alignment: .bottomLeading) {
-            ZStack {
-                if let url = card.imageUrl, !url.isEmpty {
-                    RemoteCardImage(urlString: url)
-                } else if let name = card.imageName, !name.isEmpty {
-                    Image(name)
-                        .resizable()
-                        .scaledToFill()
-                } else {
-                    Color.black.opacity(0.2)
-                }
-            }
-            .frame(width: 160, height: 220)
+            CardArtworkView(source: artworkSource)
+            .frame(width: width, height: height)
             .clipped()
             .cornerRadius(16)
             .overlay(
@@ -48,8 +62,70 @@ struct IconCardView: View {
                 .frame(maxWidth: .infinity)
                 .shadow(radius: 4)
         }
-        .frame(width: 160, height: 220)
+        .frame(width: width, height: height)
         .shadow(radius: 6)
+    }
+}
+
+private enum CardArtworkSource {
+    case remote(String)
+    case local(String)
+    case placeholder
+}
+
+private struct CardArtworkView: View {
+    let source: CardArtworkSource
+    
+    var body: some View {
+        switch source {
+        case .remote(let urlString):
+            RemoteCardArtworkView(urlString: urlString)
+        case .local(let imageName):
+            CardArtworkImageView(image: Image(imageName))
+        case .placeholder:
+            ArtworkPlaceholderView()
+        }
+    }
+}
+
+private struct RemoteCardArtworkView: View {
+    let urlString: String
+    @StateObject private var loader = RemoteImageLoader()
+    
+    var body: some View {
+        Group {
+            if let uiImage = loader.image {
+                CardArtworkImageView(image: Image(uiImage: uiImage))
+            } else {
+                ArtworkPlaceholderView()
+            }
+        }
+        .task(id: urlString) {
+            loader.loadFromCacheOrNetwork(urlString)
+        }
+    }
+}
+
+private struct CardArtworkImageView: View {
+    let image: Image
+    
+    var body: some View {
+        image
+            .resizable()
+            .scaledToFill()
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+    }
+}
+
+private struct ArtworkPlaceholderView: View {
+    var body: some View {
+        Rectangle()
+            .fill(Color.black.opacity(0.15))
+            .overlay {
+                Image(systemName: "photo")
+                    .imageScale(.large)
+                    .opacity(0.4)
+            }
     }
 }
 

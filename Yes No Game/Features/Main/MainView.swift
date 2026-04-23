@@ -14,32 +14,35 @@ struct MainView: View {
     let onOpenCard: (Card, Category) -> Void
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: 20) {
-                ForEach(viewModel.categoriesWithCards, id: \.self) { category in
-                    CategoryHScrollView(
-                        category: category,
-                        cards: viewModel.cards(for: category),
-                        onOpenCategory: { cat in
-                            onOpenCategory(cat)
-                        },
-                        onOpenCard: { card, cat in
-                            onOpenCard(card, cat)
-                        }
-                    )
+        GeometryReader { geometry in
+            ScrollView {
+                VStack(spacing: 20) {
+                    ForEach(viewModel.categoriesWithCards, id: \.self) { category in
+                        CategoryHScrollView(
+                            category: category,
+                            cards: viewModel.cards(for: category),
+                            containerWidth: geometry.size.width,
+                            onOpenCategory: { cat in
+                                onOpenCategory(cat)
+                            },
+                            onOpenCard: { card, cat in
+                                onOpenCard(card, cat)
+                            }
+                        )
+                    }
                 }
+                .padding(.vertical)
             }
-            .padding(.vertical)
+            .task {
+                await viewModel.refreshRemoteContentOnce()
+            }
+            .background(
+                Image("mainmenu")
+                    .resizable()
+                    .scaledToFill()
+                    .ignoresSafeArea()
+            )
         }
-        .task {
-            await viewModel.refreshRemoteContentOnce()
-        }
-        .background(
-            Image("mainmenu")
-                .resizable()
-                .scaledToFill()
-                .ignoresSafeArea()
-        )
     }
 }
 

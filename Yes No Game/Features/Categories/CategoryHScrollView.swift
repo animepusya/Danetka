@@ -10,11 +10,18 @@ import SwiftUI
 struct CategoryHScrollView: View {
     let category: Category
     let cards: [Card]
+    let containerWidth: CGFloat
 
     let onOpenCategory: (Category) -> Void
     let onOpenCard: (Card, Category) -> Void
 
+    private var cardLayout: AdaptiveCardLayout {
+        AdaptiveCardLayout.horizontalRow(for: containerWidth)
+    }
+
     var body: some View {
+        let layout = cardLayout
+
         VStack(alignment: .leading, spacing: 0) {
             Button {
                 onOpenCategory(category)
@@ -36,35 +43,32 @@ struct CategoryHScrollView: View {
             }
             .buttonStyle(.plain)
 
-            GeometryReader { geo in
-                let cardWidth: CGFloat = 160
-                let horizontalPadding: CGFloat = 16
-                let available = geo.size.width - (horizontalPadding * 2)
-                let computedSpacing = max(16, available - (cardWidth * 2))
-                
-                SnappingHScrollView(
-                    itemWidth: cardWidth,
-                    itemSpacing: computedSpacing,
-                    horizontalPadding: horizontalPadding,
-                    contentHeight: 220 + 24,
-                    snapDuration: 1.2
-                ) {
-                    HStack(spacing: computedSpacing) {
-                        ForEach(cards) { card in
-                            Button {
-                                onOpenCard(card, category)
-                            } label: {
-                                IconCardView(card: card)
-                                    .frame(width: cardWidth)
-                            }
-                            .buttonStyle(.plain)
+            SnappingHScrollView(
+                itemWidth: layout.cardWidth,
+                itemSpacing: layout.itemSpacing,
+                horizontalPadding: layout.horizontalPadding,
+                contentHeight: layout.contentHeight,
+                snapDuration: 1.2
+            ) {
+                HStack(spacing: layout.itemSpacing) {
+                    ForEach(cards) { card in
+                        Button {
+                            onOpenCard(card, category)
+                        } label: {
+                            IconCardView(
+                                card: card,
+                                width: layout.cardWidth,
+                                height: layout.cardHeight
+                            )
                         }
+                        .buttonStyle(.plain)
                     }
-                    .padding(.vertical, 12)
                 }
+                .padding(.vertical, layout.rowVerticalPadding)
             }
-            .frame(height: 220 + 24)
+            .frame(height: layout.contentHeight)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
@@ -74,6 +78,7 @@ struct CategoryHScrollView: View {
     CategoryHScrollView(
         category: .military,
         cards: sampleCards,
+        containerWidth: AdaptiveCardLayout.minimumTwoCardRowWidth,
         onOpenCategory: { _ in },
         onOpenCard: { _, _ in }
     )
