@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct SettingsView: View {
-    
-    @EnvironmentObject private var purchases: PurchaseManager
     @Environment(\.openURL) private var openURL
     
     private var appVersionText: String {
@@ -90,42 +88,6 @@ struct SettingsView: View {
 
                 sectionCard {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("settings.purchases_title")
-                            .font(.headline)
-                            .foregroundColor(.white)
-
-                        Button(action: {
-                            Task { await purchases.buyUnlockAll() }
-                        }) {
-                            HStack {
-                                Label("settings.unlock_all", systemImage: "lock.open")
-                                Spacer()
-                                Text(purchases.priceText(for: Category.unlockAllProductId) ?? "$4.99")
-                                    .foregroundColor(.white.opacity(0.8))
-                            }
-                            .contentShape(Rectangle())
-                            .foregroundColor(.white)
-                        }
-                        .buttonStyle(.plain)
-
-                        dividerLine()
-                        
-                        Button(action: {
-                            Task { await purchases.restorePurchases() }
-                        }) {
-                            HStack {
-                                Label("settings.restore_purchases", systemImage: "arrow.clockwise")
-                                Spacer()
-                            }
-                            .contentShape(Rectangle())
-                            .foregroundColor(.white)
-                        }
-                        .buttonStyle(.plain)
-                    }
-                }
-
-                sectionCard {
-                    VStack(alignment: .leading, spacing: 12) {
                         Text("settings.contact_title")
                             .font(.headline)
                             .foregroundColor(.white)
@@ -164,12 +126,7 @@ struct SettingsView: View {
                 .scaledToFill()
                 .ignoresSafeArea()
         )
-        .task {
-            await purchases.loadProductsIfNeeded()
-        }
     }
-    
-    
 
     private func openSystemSettings() {
         openURL(URL(string: UIApplication.openSettingsURLString)!)
@@ -208,6 +165,4 @@ struct SettingsView: View {
 
 #Preview {
     SettingsView()
-        .environmentObject(PurchaseManager())
 }
-

@@ -8,9 +8,6 @@
 import SwiftUI
 
 struct CategoryHScrollView: View {
-    @EnvironmentObject private var purchases: PurchaseManager
-    @State private var showPaywall = false
-
     let category: Category
     let cards: [Card]
 
@@ -18,13 +15,9 @@ struct CategoryHScrollView: View {
     let onOpenCard: (Card, Category) -> Void
 
     var body: some View {
-        let hasAccess = purchases.hasAccess(to: category)
-
         VStack(alignment: .leading, spacing: 0) {
-
             Button {
-                if hasAccess { onOpenCategory(category) }
-                else { showPaywall = true }
+                onOpenCategory(category)
             } label: {
                 HStack {
                     Text(category.title)
@@ -34,17 +27,6 @@ struct CategoryHScrollView: View {
                         .padding(.horizontal)
 
                     Spacer()
-
-                    if !hasAccess {
-                        HStack(spacing: 6) {
-                            Image(systemName: "lock.fill")
-                                .font(.caption)
-                                .foregroundColor(.graphite.opacity(0.5))
-                            Text(purchases.priceText(for: category.productId ?? "") ?? "$1.99")
-                                .font(.caption)
-                                .foregroundColor(.graphite.opacity(0.6))
-                        }
-                    }
 
                     Image(systemName: "chevron.right")
                         .font(.caption.weight(.semibold))
@@ -70,8 +52,7 @@ struct CategoryHScrollView: View {
                     HStack(spacing: computedSpacing) {
                         ForEach(cards) { card in
                             Button {
-                                if hasAccess { onOpenCard(card, category) }
-                                else { showPaywall = true }
+                                onOpenCard(card, category)
                             } label: {
                                 IconCardView(card: card)
                                     .frame(width: cardWidth)
@@ -83,10 +64,6 @@ struct CategoryHScrollView: View {
                 }
             }
             .frame(height: 220 + 24)
-        }
-        .sheet(isPresented: $showPaywall) {
-            PaywallView(category: category)
-                .environmentObject(purchases)
         }
     }
 }
@@ -100,5 +77,4 @@ struct CategoryHScrollView: View {
         onOpenCategory: { _ in },
         onOpenCard: { _, _ in }
     )
-    .environmentObject(PurchaseManager())
 }

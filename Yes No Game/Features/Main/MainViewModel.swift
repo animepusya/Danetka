@@ -76,10 +76,9 @@ class MainViewModel: ObservableObject {
         return .card(card, allCards: all, isRandomMode: isRandomMode)
     }
 
-    func makeRandomCardRoute(hasAccess: (Category) -> Bool) -> Route? {
-
+    func makeRandomCardRoute() -> Route? {
         let allowedCategories: [Category] = categoriesWithCards.filter { category in
-            hasAccess(category) && !shouldShowSpoilerWarning(for: category)
+            !shouldShowSpoilerWarning(for: category)
         }
         
         let pool: [Card] = allCards.filter { card in

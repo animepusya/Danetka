@@ -12,7 +12,6 @@ struct AppRootView: View {
     
     @State private var selectedSection: AppSection = .categories
     @StateObject private var mainViewModel = MainViewModel()
-    @StateObject private var purchases = PurchaseManager()
     
     @State private var path: [Route] = []
     
@@ -35,9 +34,7 @@ struct AppRootView: View {
                                 if selected != .categories { path.removeAll() }
                             },
                             onRandomCard: {
-                                if let route = mainViewModel.makeRandomCardRoute(hasAccess: { category in
-                                    purchases.hasAccess(to: category)
-                                }) {
+                                if let route = mainViewModel.makeRandomCardRoute() {
                                     if mainViewModel.spoilerPrompt == nil {
                                         path.append(route)
                                     }
@@ -97,7 +94,6 @@ struct AppRootView: View {
                 .zIndex(1)
             }
         }
-        .environmentObject(purchases)
     }
     
     @ViewBuilder

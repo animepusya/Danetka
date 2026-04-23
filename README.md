@@ -65,7 +65,6 @@ Each riddle is presented as a card with smooth transitions and subtle animations
 - **URLSession**
 - **Localization**
 - **Local caching**
-- **In-App Purchases**
 - **Custom animations**
 
 ---
@@ -77,10 +76,9 @@ The app uses **MVVM** with a clear separation between UI and data layers:
 - **Presentation (MVVM)** — SwiftUI screens, navigation, animations, ViewModels (`Features/*`, `UIComponents`, `Navigation`)
 - **Domain (Models)** — cards, categories, remote manifest (`Shared/Models`, localized resources)
 - **Data layer** — networking, caching, repositories, persistence (`Services`, `Repository`, `Shared/Persistence`)
-- **Purchases** — StoreKit flow, transaction handling, access control (`Purchases`)
 
 This structure keeps the project scalable:
-new packs, cards, languages, or monetization rules can be added mostly in the data/config layer without rewriting UI.
+new packs, cards, and languages can be added mostly in the data/config layer without rewriting UI.
 
 ---
 
@@ -90,7 +88,6 @@ new packs, cards, languages, or monetization rules can be added mostly in the da
 - Working with remote APIs and local caching
 - App state management and navigation
 - Localization-ready UI
-- Real-world monetization integration
 - Structuring a pet project close to production quality
 
 ---

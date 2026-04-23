@@ -9,8 +9,6 @@ import SwiftUI
 
 struct CategoryVScrollView: View {
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject private var purchases: PurchaseManager
-    @State private var showPaywall = false
 
     let category: Category
     let cards: [Card]
@@ -38,12 +36,7 @@ struct CategoryVScrollView: View {
                 LazyVGrid(columns: columns, spacing: 16) {
                     ForEach(cards) { card in
                         Button {
-                            // ✅ единая логика: либо открываем, либо paywall
-                            if purchases.hasAccess(to: category) {
-                                onOpenCard(card, category)
-                            } else {
-                                showPaywall = true
-                            }
+                            onOpenCard(card, category)
                         } label: {
                             IconCardView(card: card)
                         }
@@ -60,15 +53,6 @@ struct CategoryVScrollView: View {
                 .ignoresSafeArea()
         )
         .navigationBarHidden(true)
-        .onAppear {
-            if !purchases.hasAccess(to: category) {
-                showPaywall = true
-            }
-        }
-        .sheet(isPresented: $showPaywall) {
-            PaywallView(category: category)
-                .environmentObject(purchases)
-        }
     }
 }
 
