@@ -54,14 +54,10 @@ struct CardScreenLayout {
         horizontalSizeClass: UserInterfaceSizeClass?
     ) -> CardScreenLayout {
         let isPad = AdaptiveWindowLayout.isPad
-        let isSplitView = AdaptiveWindowLayout.isPadSplitView(
+        let scale = AdaptiveWindowLayout.contentScale(
             containerSize: containerSize,
-            horizontalSizeClass: horizontalSizeClass
-        )
-        let scale = resolvedScale(
-            for: containerSize.width,
-            isPad: isPad,
-            isSplitView: isSplitView
+            horizontalSizeClass: horizontalSizeClass,
+            range: Base.iPadContentScale
         )
 
         func scaled(_ value: CGFloat) -> CGFloat {
@@ -208,42 +204,19 @@ fileprivate extension CardScreenLayout {
         static let controlShadowY: CGFloat = 2
         static let bottomScrollPadding: CGFloat = 180
 
-        static let iPadScaleLowerWidth: CGFloat = 390
-        static let iPadScaleUpperWidth: CGFloat = 1180
-        static let iPadMinimumScale: CGFloat = 1.28
-        static let iPadFullscreenMinimumScale: CGFloat = 1.68
-        static let iPadMaximumScale: CGFloat = 2.05
-        static let iPadSplitViewMaximumScale: CGFloat = 1.64
-    }
-
-    static func resolvedScale(for width: CGFloat, isPad: Bool, isSplitView: Bool) -> CGFloat {
-        guard isPad else { return 1 }
-
-        let progress = normalized(
-            value: width,
-            lowerBound: Base.iPadScaleLowerWidth,
-            upperBound: Base.iPadScaleUpperWidth
+        static let iPadContentScale = AdaptiveWindowLayout.ContentScaleRange(
+            compactWidth: 320,
+            expandedWidth: 1180,
+            compactScale: 1,
+            regularMinimumScale: 1.68,
+            maximumScale: 2.05,
+            splitViewMaximumScale: 1.64
         )
-        var scale = Base.iPadMinimumScale + ((Base.iPadMaximumScale - Base.iPadMinimumScale) * progress)
-
-        if isSplitView {
-            scale = min(scale, Base.iPadSplitViewMaximumScale)
-        } else {
-            scale = max(scale, Base.iPadFullscreenMinimumScale)
-        }
-
-        return min(max(scale, Base.iPadMinimumScale), Base.iPadMaximumScale)
     }
 
     static func maxContentWidth(for width: CGFloat, scale: CGFloat) -> CGFloat {
-        let spaciousWidthBonus = max(0, scale - Base.iPadFullscreenMinimumScale) * 360
+        let spaciousWidthBonus = max(0, scale - Base.iPadContentScale.regularMinimumScale) * 360
         let maxWidth = 900 + spaciousWidthBonus
         return min(maxWidth, max(width - (Base.iPadContentHorizontalPadding * 2), Base.minimumReadableWidth))
-    }
-
-    static func normalized(value: CGFloat, lowerBound: CGFloat, upperBound: CGFloat) -> CGFloat {
-        guard upperBound > lowerBound else { return 0 }
-        let rawValue = (value - lowerBound) / (upperBound - lowerBound)
-        return min(max(rawValue, 0), 1)
     }
 }

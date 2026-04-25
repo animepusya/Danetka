@@ -15,6 +15,15 @@ struct AdaptiveWindowLayout {
         static let none = BackButtonAdjustment(leading: 0, top: 0)
     }
 
+    struct ContentScaleRange: Equatable {
+        let compactWidth: CGFloat
+        let expandedWidth: CGFloat
+        let compactScale: CGFloat
+        let regularMinimumScale: CGFloat
+        let maximumScale: CGFloat
+        let splitViewMaximumScale: CGFloat
+    }
+
     @MainActor
     static var isPad: Bool {
         #if os(iOS)
@@ -45,6 +54,34 @@ struct AdaptiveWindowLayout {
                 safeAreaTop: safeAreaInsets.top
             )
         )
+    }
+
+    @MainActor
+    static func contentScale(
+        containerSize: CGSize,
+        horizontalSizeClass: UserInterfaceSizeClass?,
+        range: ContentScaleRange
+    ) -> CGFloat {
+        guard isPad else { return 1 }
+
+        let isSplitView = isPadSplitView(
+            containerSize: containerSize,
+            horizontalSizeClass: horizontalSizeClass
+        )
+        let widthProgress = normalized(
+            value: containerSize.width,
+            lowerBound: range.compactWidth,
+            upperBound: range.expandedWidth
+        )
+        var scale = range.compactScale + ((range.maximumScale - range.compactScale) * widthProgress)
+
+        if isSplitView {
+            scale = min(scale, range.splitViewMaximumScale)
+        } else {
+            scale = max(scale, range.regularMinimumScale)
+        }
+
+        return min(max(scale, range.compactScale), range.maximumScale)
     }
 
     @MainActor
@@ -113,5 +150,11 @@ private extension AdaptiveWindowLayout {
             width: min(size.width, size.height),
             height: max(size.width, size.height)
         )
+    }
+
+    static func normalized(value: CGFloat, lowerBound: CGFloat, upperBound: CGFloat) -> CGFloat {
+        guard upperBound > lowerBound else { return 0 }
+        let rawValue = (value - lowerBound) / (upperBound - lowerBound)
+        return min(max(rawValue, 0), 1)
     }
 }
