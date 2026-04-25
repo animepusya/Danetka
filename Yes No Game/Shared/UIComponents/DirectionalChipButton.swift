@@ -8,6 +8,24 @@
 import SwiftUI
 
 struct DirectionalChipButton: View {
+    struct Metrics {
+        let font: Font
+        let contentSpacing: CGFloat
+        let verticalPadding: CGFloat
+        let horizontalPadding: CGFloat
+        let shadowRadius: CGFloat
+        let shadowY: CGFloat
+
+        static let standard = Metrics(
+            font: .subheadline.weight(.semibold),
+            contentSpacing: 6,
+            verticalPadding: 8,
+            horizontalPadding: 12,
+            shadowRadius: 4,
+            shadowY: 2
+        )
+    }
+
     enum Direction {
         case back
         case forward
@@ -19,6 +37,7 @@ struct DirectionalChipButton: View {
 
     var style: Style = .neutral
     var isDisabled: Bool = false
+    var metrics: Metrics = .standard
 
     enum Style {
         case neutral
@@ -28,12 +47,19 @@ struct DirectionalChipButton: View {
     var body: some View {
         Button(action: action) {
             content
+                .font(metrics.font)
+                .fixedSize(horizontal: true, vertical: false)
                 .foregroundStyle(foregroundColor)
-                .padding(.vertical, 8)
-                .padding(.horizontal, 12)
+                .padding(.vertical, metrics.verticalPadding)
+                .padding(.horizontal, metrics.horizontalPadding)
                 .background(background)
                 .clipShape(Capsule())
-                .shadow(color: Color.black.opacity(0.12), radius: 4, x: 0, y: 2)
+                .shadow(
+                    color: Color.black.opacity(0.12),
+                    radius: metrics.shadowRadius,
+                    x: 0,
+                    y: metrics.shadowY
+                )
                 .opacity(isDisabled ? 0.55 : 1)
         }
         .buttonStyle(.plain)
@@ -44,16 +70,14 @@ struct DirectionalChipButton: View {
     private var content: some View {
         switch direction {
         case .back:
-            HStack(spacing: 6) {
+            HStack(spacing: metrics.contentSpacing) {
                 Image(systemName: "chevron.left")
                 Text(title)
-                    .font(.subheadline.weight(.semibold))
             }
 
         case .forward:
-            HStack(spacing: 6) {
+            HStack(spacing: metrics.contentSpacing) {
                 Text(title)
-                    .font(.subheadline.weight(.semibold))
                 Image(systemName: "chevron.right")
             }
         }

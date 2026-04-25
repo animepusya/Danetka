@@ -8,44 +8,78 @@
 import SwiftUI
 
 struct ExpandableButtonView: View {
+    struct Metrics {
+        let titleFont: Font
+        let explanationFont: Font
+        let stackSpacing: CGFloat
+        let explanationPadding: CGFloat
+        let verticalPadding: CGFloat
+        let horizontalPadding: CGFloat
+        let outerHorizontalPadding: CGFloat
+        let cornerRadius: CGFloat
+        let explanationCornerRadius: CGFloat
+        let shadowRadius: CGFloat
+        let shadowY: CGFloat
+
+        static let standard = Metrics(
+            titleFont: .title3,
+            explanationFont: .body,
+            stackSpacing: 10,
+            explanationPadding: 12,
+            verticalPadding: 14,
+            horizontalPadding: 14,
+            outerHorizontalPadding: 16,
+            cornerRadius: 16,
+            explanationCornerRadius: 12,
+            shadowRadius: 4,
+            shadowY: 2
+        )
+    }
+
     let title: LocalizedStringKey
     let explanation: String
     let backgroundColor: Color
     @Binding var isExpanded: Bool
-    
+    var metrics: Metrics = .standard
+
     var body: some View {
         Button(action: {
             withAnimation(.easeInOut(duration: 0.35)) {
                 isExpanded.toggle()
             }
         }) {
-            VStack(spacing: 10) {
+            VStack(spacing: metrics.stackSpacing) {
                 Text(title)
-                    .font(.title3)
+                    .font(metrics.titleFont)
                     .fontWeight(.semibold)
                     .foregroundColor(Color.black.opacity(0.85))
 
                 if isExpanded {
                     Text(explanation)
-                        .font(.body)
+                        .font(metrics.explanationFont)
                         .foregroundColor(.white)
                         .multilineTextAlignment(.leading)
-                        .padding(12)
+                        .padding(metrics.explanationPadding)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .background(
-                            RoundedRectangle(cornerRadius: 12)
+                            RoundedRectangle(cornerRadius: metrics.explanationCornerRadius)
                                 .fill(Color.black.opacity(0.35))
                         )
                         .transition(.opacity.combined(with: .move(edge: .bottom)))
                 }
             }
-            .padding(.vertical, 14)
-            .padding(.horizontal, 14)
+            .padding(.vertical, metrics.verticalPadding)
+            .padding(.horizontal, metrics.horizontalPadding)
             .frame(maxWidth: .infinity)
             .background(backgroundColor)
-            .cornerRadius(16)
-            .shadow(color: Color.black.opacity(0.12), radius: 4, x: 0, y: 2)
-            .padding(.horizontal)
+            .cornerRadius(metrics.cornerRadius)
+            .shadow(
+                color: Color.black.opacity(0.12),
+                radius: metrics.shadowRadius,
+                x: 0,
+                y: metrics.shadowY
+            )
+            .padding(.horizontal, metrics.outerHorizontalPadding)
         }
         .buttonStyle(.plain)
     }
