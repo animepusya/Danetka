@@ -9,49 +9,67 @@ import SwiftUI
 
 struct CategoryVScrollView: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
     let category: Category
     let cards: [Card]
     let onOpenCard: (Card, Category) -> Void
 
-    private let columns = [
-        GridItem(.flexible(), spacing: 16),
-        GridItem(.flexible(), spacing: 16)
-    ]
+    private let topControlsSpacing: CGFloat = 10
+    private let topControlsPadding: CGFloat = 16
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            HStack(spacing: 10) {
-                DirectionalChipButton(
-                    title: "nav.back",
-                    direction: .back,
-                    action: { dismiss() },
-                    style: .neutral
-                )
-                Spacer()
-            }
-            .padding([.top, .horizontal])
+        GeometryReader { geometry in
+            let cardLayout = AdaptiveCardLayout.verticalGrid(for: geometry.size.width)
+            let backButtonAdjustment = AdaptiveWindowLayout.backButtonAdjustment(
+                containerSize: geometry.size,
+                safeAreaInsets: geometry.safeAreaInsets,
+                horizontalSizeClass: horizontalSizeClass
+            )
 
-            ScrollView {
-                LazyVGrid(columns: columns, spacing: 16) {
-                    ForEach(cards) { card in
-                        Button {
-                            onOpenCard(card, category)
-                        } label: {
-                            IconCardView(card: card)
-                        }
-                        .buttonStyle(.plain)
-                    }
+            VStack(alignment: .leading, spacing: cardLayout.itemSpacing) {
+                HStack(spacing: topControlsSpacing) {
+                    DirectionalChipButton(
+                        title: "nav.back",
+                        direction: .back,
+                        action: { dismiss() },
+                        style: .neutral
+                    )
+                    .padding(.leading, backButtonAdjustment.leading)
+
+                    Spacer()
                 }
-                .padding()
+                .padding(.top, topControlsPadding + backButtonAdjustment.top)
+                .padding(.horizontal, topControlsPadding)
+
+                ScrollView {
+                    LazyVGrid(columns: cardLayout.gridColumns, spacing: cardLayout.itemSpacing) {
+                        ForEach(cards) { card in
+                            Button {
+                                onOpenCard(card, category)
+                            } label: {
+                                IconCardView(
+                                    card: card,
+                                    width: cardLayout.cardWidth,
+                                    height: cardLayout.cardHeight
+                                )
+                            }
+                            .buttonStyle(.plain)
+                        }
+                    }
+                    .padding(.horizontal, cardLayout.horizontalPadding)
+                    .padding(.vertical, cardLayout.rowVerticalPadding)
+                    .frame(maxWidth: .infinity)
+                }
             }
+            .frame(width: geometry.size.width, height: geometry.size.height, alignment: .topLeading)
+            .background(
+                Image("mainmenu")
+                    .resizable()
+                    .scaledToFill()
+                    .ignoresSafeArea()
+            )
         }
-        .background(
-            Image("mainmenu")
-                .resizable()
-                .scaledToFill()
-                .ignoresSafeArea()
-        )
         .navigationBarHidden(true)
     }
 }

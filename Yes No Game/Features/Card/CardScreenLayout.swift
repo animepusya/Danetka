@@ -53,8 +53,8 @@ struct CardScreenLayout {
         safeAreaInsets: EdgeInsets,
         horizontalSizeClass: UserInterfaceSizeClass?
     ) -> CardScreenLayout {
-        let isPad = Device.current.isPad
-        let isSplitView = Device.current.isPadSplitView(
+        let isPad = AdaptiveWindowLayout.isPad
+        let isSplitView = AdaptiveWindowLayout.isPadSplitView(
             containerSize: containerSize,
             horizontalSizeClass: horizontalSizeClass
         )
@@ -93,12 +93,12 @@ struct CardScreenLayout {
             )
             : .infinity
 
-        let splitViewBackButtonLeadingOffset = isSplitView
-            ? splitViewBackButtonLeadingOffset(for: containerSize.width)
-            : 0
-        let splitViewTopOffset = isSplitView
-            ? splitViewBackButtonTopOffset(scale: scale, safeAreaTop: safeAreaInsets.top)
-            : 0
+        let backButtonAdjustment = AdaptiveWindowLayout.backButtonAdjustment(
+            containerSize: containerSize,
+            safeAreaInsets: safeAreaInsets,
+            horizontalSizeClass: horizontalSizeClass,
+            controlScale: scale
+        )
 
         return CardScreenLayout(
             typography: typography,
@@ -111,8 +111,8 @@ struct CardScreenLayout {
             topControls: TopControlsMetrics(
                 spacing: scaled(Base.topControlsSpacing),
                 horizontalPadding: Base.phoneHorizontalPadding,
-                topPadding: Base.topControlsTopPadding + splitViewTopOffset,
-                splitViewBackButtonLeadingOffset: splitViewBackButtonLeadingOffset,
+                topPadding: Base.topControlsTopPadding + backButtonAdjustment.top,
+                splitViewBackButtonLeadingOffset: backButtonAdjustment.leading,
                 chipButton: DirectionalChipButton.Metrics(
                     font: isPad
                         ? .system(size: scaled(Base.chipFontSize), weight: .semibold)
@@ -214,13 +214,6 @@ fileprivate extension CardScreenLayout {
         static let iPadFullscreenMinimumScale: CGFloat = 1.68
         static let iPadMaximumScale: CGFloat = 2.05
         static let iPadSplitViewMaximumScale: CGFloat = 1.64
-
-        static let splitViewSceneRatioTolerance: CGFloat = 0.96
-        static let splitViewMinimumReservedLeading: CGFloat = 84
-        static let splitViewMaximumReservedLeading: CGFloat = 124
-        static let splitViewReservedLeadingWidthRatio: CGFloat = 0.14
-        static let splitViewMinimumTopOffset: CGFloat = 8
-        static let splitViewMaximumTopOffset: CGFloat = 18
     }
 
     static func resolvedScale(for width: CGFloat, isPad: Bool, isSplitView: Bool) -> CGFloat {
@@ -248,73 +241,9 @@ fileprivate extension CardScreenLayout {
         return min(maxWidth, max(width - (Base.iPadContentHorizontalPadding * 2), Base.minimumReadableWidth))
     }
 
-    static func splitViewBackButtonLeadingOffset(for width: CGFloat) -> CGFloat {
-        let reservedLeading = min(
-            Base.splitViewMaximumReservedLeading,
-            max(Base.splitViewMinimumReservedLeading, width * Base.splitViewReservedLeadingWidthRatio)
-        )
-        return max(0, reservedLeading - Base.phoneHorizontalPadding)
-    }
-
-    static func splitViewBackButtonTopOffset(scale: CGFloat, safeAreaTop: CGFloat) -> CGFloat {
-        let safeAreaInfluence = min(max(safeAreaTop * 0.2, 0), Base.splitViewMaximumTopOffset)
-        let scaledOffset = Base.splitViewMinimumTopOffset * scale
-        return min(
-            Base.splitViewMaximumTopOffset,
-            max(Base.splitViewMinimumTopOffset, scaledOffset + safeAreaInfluence)
-        )
-    }
-
     static func normalized(value: CGFloat, lowerBound: CGFloat, upperBound: CGFloat) -> CGFloat {
         guard upperBound > lowerBound else { return 0 }
         let rawValue = (value - lowerBound) / (upperBound - lowerBound)
         return min(max(rawValue, 0), 1)
-    }
-}
-
-private struct Device {
-    static let current = Device()
-
-    @MainActor
-    var isPad: Bool {
-        #if os(iOS)
-        UIDevice.current.userInterfaceIdiom == .pad
-        #else
-        false
-        #endif
-    }
-
-    @MainActor
-    func isPadSplitView(
-        containerSize: CGSize,
-        horizontalSizeClass: UserInterfaceSizeClass?
-    ) -> Bool {
-        guard isPad else { return false }
-
-        #if os(iOS)
-        if let scene = UIApplication.shared.connectedScenes
-            .compactMap({ $0 as? UIWindowScene })
-            .first(where: { $0.activationState == .foregroundActive || $0.activationState == .foregroundInactive }) {
-            let sceneSize = normalizedSize(scene.coordinateSpace.bounds.size)
-            let containerSize = normalizedSize(containerSize)
-            let screenSize = normalizedSize(scene.screen.bounds.size)
-            let sceneWidthRatio = sceneSize.width / max(screenSize.width, 1)
-            let containerWidthRatio = containerSize.width / max(screenSize.width, 1)
-            let widthRatio = min(sceneWidthRatio, containerWidthRatio)
-
-            if widthRatio < CardScreenLayout.Base.splitViewSceneRatioTolerance {
-                return true
-            }
-        }
-        #endif
-
-        return horizontalSizeClass == .compact && containerSize.width > 430
-    }
-
-    private func normalizedSize(_ size: CGSize) -> CGSize {
-        CGSize(
-            width: min(size.width, size.height),
-            height: max(size.width, size.height)
-        )
     }
 }
