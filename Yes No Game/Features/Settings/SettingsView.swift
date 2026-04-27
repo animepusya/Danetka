@@ -93,25 +93,9 @@ struct SettingsView: View {
                             .foregroundColor(.white)
 
                         contactLink(
-                            title: "Email",
+                            title: "rus.melanin@mail.ru",
                             systemImage: "envelope",
                             urlString: "mailto:rus.melanin@mail.ru"
-                        )
-
-                        dividerLine()
-
-                        contactLink(
-                            title: "GitHub",
-                            systemImage: "link",
-                            urlString: "https://github.com/animepusya"
-                        )
-
-                        dividerLine()
-
-                        contactLink(
-                            title: "Telegram",
-                            systemImage: "paperplane",
-                            urlString: "https://t.me/animepusya"
                         )
                     }
                 }

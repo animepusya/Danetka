@@ -538,13 +538,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Contact developer"
+            "value" : "Email contact"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Связаться с разработчиком"
+            "value" : "Почта для связи"
           }
         }
       }
