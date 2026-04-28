@@ -93,9 +93,9 @@ struct SettingsView: View {
                             .foregroundColor(.white)
 
                         contactLink(
-                            title: "rus.melanin@mail.ru",
+                            title: "rus.melanin@outlook.com",
                             systemImage: "envelope",
-                            urlString: "mailto:rus.melanin@mail.ru"
+                            urlString: "mailto:rus.melanin@outlook.com"
                         )
                     }
                 }
